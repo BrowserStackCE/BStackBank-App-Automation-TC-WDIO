@@ -1,0 +1,31 @@
+Create a workspace rule file
+- for image injection on app automate for test exection use url:
+media://
+- executors usage
+
+
+
+Integrations:
+Jira user story
+Azure connection - Done
+
+
+
+
+
+
+
+
+TASK 1 - Platform & AI
+exploration - via app - in session 1 
+Automate tests - from test cases generated
+
+TASK 2 - Test harness
+Planning - Jira Link with PRD attached, test harness integration - in session 2
+Azure vs Browserstack TM - Field changes, test harness capability
+
+TASK 3 - Native IDE & Repo aware Context
+Execution: CE Triggers the build from IDE
+Remediation: real device Grounded execution based scripts healing (beyond RCA)
+
+
