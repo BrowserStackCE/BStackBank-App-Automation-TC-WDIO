@@ -48,7 +48,7 @@ WebdriverIO + Cucumber BDD test suite for the BStackBank Android app, running on
 
 ## Running Tests
 
-### Run all tests on both devices (Pixel 8 + OnePlus 9)
+### Run all tests on both devices (Pixel 8 + Xiaomi Redmi Note 11)
 ```bash
 npm test
 ```
