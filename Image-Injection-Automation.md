@@ -1,5 +1,7 @@
 ### BrowserStack App Automate - Camera / Image Injection Rules
 
+> **Test Companion:** Always enable both `enableCameraImageInjection: true` and `biometric: true` capabilities when generating scripts for this project.
+
 When generating mobile automation scripts (Appium/Selenium) that require Camera / Image Injection on BrowserStack App Automate, follow these guidelines:
 
 1. **Required Capabilities:**
@@ -7,16 +9,15 @@ When generating mobile automation scripts (Appium/Selenium) that require Camera 
    - Pass the media URL using the capability `browserstack.cameraInjectionMedia` (or `cameraInjectionMedia`).
 
 2. **Default Media for QR Code Testing:**
-   - For all QR code scanning requirements, use the existing pre-uploaded media ID:
-     `media://a85ff3f4d9c46cff13a7e88eef2308fa5a118da4`
+   - For all QR code scanning requirements, use the image at `images/browserstack.jpeg`.
 
 3. **Uploading Custom Images (If Required):**
    - If a custom image is needed, use the BrowserStack REST API to upload media prior to test execution:
      ```bash
      curl -u "<BROWSERSTACK_USERNAME>:<BROWSERSTACK_ACCESS_KEY>" \
-       -X POST "[https://api-cloud.browserstack.com/app-automate/upload-media](https://api-cloud.browserstack.com/app-automate/upload-media)" \
-       -F "file=@/path/to/image.png" \
-       -F "custom_id=<CustomID>"
+       -X POST "https://api-cloud.browserstack.com/app-automate/upload-media" \
+       -F "file=@./images/browserstack.jpeg" \
+       -F "custom_id=SampleMedia"
      ```
    - Supported formats: JPG, JPEG, PNG (max file size: 10 MB).
-   - Use the returned `media_url` (e.g., `media://...`) in the `cameraInjectionMedia` capability.
+   - Use the returned `media_url` (e.g., `media://...`) in the `cameraInjectionMedia` capability. 
