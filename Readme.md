@@ -27,13 +27,13 @@ WebdriverIO + Cucumber BDD test suite for the BStackBank Android app, running on
 
 3. **Upload the app to BrowserStack** to get your `BS_APP_ID`:
 
-   The app APK is located at `assets/app-release.apk`.
+   The app APK is: [app-release.apk](https://drive.google.com/drive/folders/1J7HBizvt2QNP90FQHwGN_koda7WrBe_P?usp=sharing)
 
    Upload it using the BrowserStack REST API:
    ```bash
    curl -u "YOUR_USERNAME:YOUR_ACCESS_KEY" \
      -X POST "https://api-cloud.browserstack.com/app-automate/upload" \
-     -F "file=@assets/app-release.apk"
+     -F "file=@your-path/app-release.apk"
    ```
    The response will contain an `app_url` like `bs://xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`. Set that as `BS_APP_ID` in your `.env`.
 
