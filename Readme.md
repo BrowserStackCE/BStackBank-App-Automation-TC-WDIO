@@ -3,52 +3,11 @@
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [Demo Flow Coverage](#demo-flow-coverage)
-3. [Demo Setup Instructions](#setup-instructions)
-4. [Repo Prerequisites](#prerequisites)
+2. [Repo Prerequisites](#prerequisites)
+3. [Demo Flow Coverage](#demo-flow-coverage)
+4. [Demo Setup Instructions](#setup-instructions)
 5. [Running Tests](#running-tests)
 6. [Test Scenarios](#test-scenarios)
-
----
-
-## Overview
-
-WebdriverIO + Cucumber BDD test suite for the BStackBank Android app, running on **BrowserStack App Automate**.
-
-**Target devices:** Google Pixel 8 / Android 14, Xiaomi Redmi Note 11 / Android 11
-> Note: Use a Non-Samsung device, as the locators are mapped as per it.
-
----
-
-## Demo Flow Coverage
-
-### Task 1 — Platform & AI
-- **Explore** the app live on a real device (Session 1) and auto-generate test cases using AI
-- **Automate** those test cases into a runnable test suite
-
-### Task 2 — Test Harness
-- **Plan** using a Jira PRD link; generate test cases and sync them to the test harness (Session 2)
-- **Compare** Azure Test Plans vs BrowserStack Test Management — field mapping and harness capabilities
-
-### Task 3 — Native IDE & Repo-Aware Context
-- **Execute** the full suite triggered directly from the IDE
-- **Remediate** failures with real-device-grounded script healing (beyond RCA)
-
----
-
-## Setup Instructions
-
-Before running the demo, complete the following one-time setup steps:
-
-1. **Non-Samsung device skill** — the `SKILL.md` file configures Test Companion to always use a non-Samsung (Google Pixel) device. No action needed; it is already in the repo.
-
-2. **Image injection rule** — the `Image-Injection-Automation.md` file tells the AI to enable camera/image injection and use `./images/browserstack.jpeg` as the default QR code image. No action needed; it is already in the repo.
-
-3. **Test Companion settings** — in the Test Companion settings panel, enable:
-   - ✅ Biometric authentication
-   - ✅ Image injection
-
-4. **Intentional locator bug** — `step-definitions/signup.steps.js` line 72 uses `toggle-pasword-visibility` (typo) instead of `toggle-password-visibility`. This is intentional for the Task 3 remediation demo.
 
 ---
 
@@ -109,6 +68,49 @@ Run the entire test suite
    ```bash
    npm install
    ```
+
+---
+
+## Overview
+
+WebdriverIO + Cucumber BDD test suite for the BStackBank Android app, running on **BrowserStack App Automate**.
+
+**Target devices:** Google Pixel 8 / Android 14, Xiaomi Redmi Note 11 / Android 11
+> Note: Use a Non-Samsung device, as the locators are mapped as per it.
+
+---
+
+## Demo Flow Coverage
+
+### Task 1 — Platform & AI
+- **Explore** the app live on a real device (Session 1) and auto-generate test cases using AI
+- **Automate** those test cases into a runnable test suite
+
+### Task 2 — Test Harness
+- **Plan** using a Jira PRD link; generate test cases and sync them to the test harness (Session 2)
+- **Compare** Azure Test Plans vs BrowserStack Test Management — field mapping and harness capabilities
+
+### Task 3 — Native IDE & Repo-Aware Context
+- **Execute** the full suite triggered directly from the IDE
+- **Remediate** failures with real-device-grounded script healing (beyond RCA)
+
+---
+
+## Setup Instructions
+
+Before running the demo, complete the following one-time setup steps:
+
+1. **Non-Samsung device skill** — the `SKILL.md` file configures Test Companion to always use a non-Samsung (Google Pixel) device. No action needed; it is already in the repo.
+
+2. **Image injection rule** — the `Image-Injection-Automation.md` file tells the AI to enable camera/image injection and use `./images/browserstack.jpeg` as the default QR code image. No action needed; it is already in the repo.
+
+3. **Test Companion settings** — in the Test Companion settings panel, enable:
+   - ✅ Biometric authentication
+   - ✅ Image injection
+
+4. **Intentional locator bug** — `step-definitions/signup.steps.js` line 72 uses `toggle-pasword-visibility` (typo) instead of `toggle-password-visibility`. This is intentional for the Task 3 remediation demo.
+
+
 
 ---
 
