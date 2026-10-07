@@ -9,28 +9,15 @@
 5. [Running Tests](#running-tests)
 6. [Test Scenarios](#test-scenarios)
 
+
 ---
 
-## Prompts for Each Task
+## Overview
 
-### Task 1
-```
-Please help me create 2 comprehensive test cases for biometric and image scanning
-by exploring the following app using /pixel-device
-```
+WebdriverIO + Cucumber BDD test suite for the BStackBank Android app, running on **BrowserStack App Automate**.
 
-### Task 2
-```
-Please help me create comprehensive test cases based on the project requirements
-and specifications from the following link: <Jira ticket link>
-```
-
-### Task 3
-```
-Run the entire test suite
-```
-
-> Note: AI will fetch RCA, fix the locator and then re-run the test
+**Target devices:** Google Pixel 8 / Android 14, Xiaomi Redmi Note 11 / Android 11
+> Note: Use a Non-Samsung device, as the locators are mapped as per it.
 
 ---
 
@@ -71,14 +58,8 @@ Run the entire test suite
 
 ---
 
-## Overview
 
-WebdriverIO + Cucumber BDD test suite for the BStackBank Android app, running on **BrowserStack App Automate**.
 
-**Target devices:** Google Pixel 8 / Android 14, Xiaomi Redmi Note 11 / Android 11
-> Note: Use a Non-Samsung device, as the locators are mapped as per it.
-
----
 
 ## Demo Flow Coverage
 
@@ -94,7 +75,9 @@ WebdriverIO + Cucumber BDD test suite for the BStackBank Android app, running on
 - **Execute** the full suite triggered directly from the IDE
 - **Remediate** failures with real-device-grounded script healing (beyond RCA)
 
+
 ---
+
 
 ## Setup Instructions
 
@@ -109,6 +92,34 @@ Before running the demo, complete the following one-time setup steps:
    - ✅ Image injection
 
 4. **Intentional locator bug** — `step-definitions/signup.steps.js` line 72 uses `toggle-pasword-visibility` (typo) instead of `toggle-password-visibility`. This is intentional for the Task 3 remediation demo.
+
+
+
+---
+
+
+
+
+## Prompts for Each Task
+
+### Task 1
+```
+Please help me create 2 comprehensive test cases for biometric and image scanning
+by exploring the following app using /pixel-device
+```
+
+### Task 2
+```
+Please help me create comprehensive test cases based on the project requirements
+and specifications from the following link: <Jira ticket link>
+```
+
+### Task 3
+```
+Run the entire test suite
+```
+
+> Note: AI will fetch RCA, fix the locator and then re-run the test
 
 
 
