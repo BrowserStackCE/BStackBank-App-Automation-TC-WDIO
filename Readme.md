@@ -16,7 +16,6 @@
 WebdriverIO + Cucumber BDD test suite for the BStackBank Android app, running on **BrowserStack App Automate**.
 
 **Target devices:** Google Pixel 8 / Android 14, Xiaomi Redmi Note 11 / Android 11
-> Note: Use a Non-Samsung device, as the locators are mapped as per it.
 
 ---
 
@@ -44,11 +43,12 @@ Before running the demo, complete the following one-time setup steps:
 
 2. **Image injection rule** — the `Image-Injection-Automation.md` file tells the AI to enable camera/image injection and use `./images/browserstack.jpeg` as the default QR code image. No action needed; it is already in the repo.
 
+
 3. **Test Companion settings** — in the Test Companion settings panel, enable:
    - ✅ Biometric authentication
    - ✅ Image injection
 
-4. **Intentional locator bug** — `step-definitions/signup.steps.js` line 72 uses `toggle-pasword-visibility` (typo) instead of `toggle-password-visibility`. This is intentional for the Task 3 remediation demo.
+4. **Intentional locator bug** — `step-definitions/signup.steps.js` line 72 uses `toggle-pasword-visibility` (typo) instead of `toggle-password-visibility`. This is intentional for the Task 3 remediation demo. **Already in place — no action needed.** After the demo, rebase to this commit to reset the repo for the next run.
 
 ---
 
@@ -71,7 +71,6 @@ and specifications from the following link: <Jira ticket link>
 Run the entire test suite
 ```
 
-> Note: AI will fetch RCA, fix the locator and then re-run the test
 
 ---
 
@@ -79,29 +78,26 @@ Run the entire test suite
 
 1. **Node.js** ≥ 18
 
-2. **BrowserStack credentials** — copy `.env.example` to `.env` and fill in your values:
+2. **BrowserStack credentials** — ensure the following environment variables are set in your shell before running tests:
    ```bash
-   cp .env.example .env
-   ```
-   Then open `.env` and set:
-   ```
-   BROWSERSTACK_USERNAME=<your-username>
-   BROWSERSTACK_ACCESS_KEY=<your-access-key>
-   BS_APP_ID=bs://<your-app-id>
+   export BROWSERSTACK_USERNAME=<your-username>
+   export BROWSERSTACK_ACCESS_KEY=<your-access-key>
    ```
    > Find your credentials at [BrowserStack App Automate dashboard](https://app-automate.browserstack.com/).
 
-3. **Upload the app to BrowserStack** to get your `BS_APP_ID`:
+3. **App ID** — set the `BS_APP_ID` environment variable to your uploaded app's BrowserStack URL:
+   ```bash
+   export BS_APP_ID=bs://<your-app-id>
+   ```
+   > If you explored the app via Test Companion, the app is already uploaded and its `bs://` ID is available in the Test Companion panel — use that directly.
 
-   The app APK is: [app-release.apk](https://drive.google.com/drive/folders/1J7HBizvt2QNP90FQHwGN_koda7WrBe_P?usp=sharing)
-
-   Upload it using the BrowserStack REST API:
+   To upload manually:
    ```bash
    curl -u "YOUR_USERNAME:YOUR_ACCESS_KEY" \
      -X POST "https://api-cloud.browserstack.com/app-automate/upload" \
      -F "file=@your-path/app-release.apk"
    ```
-   The response will contain an `app_url` like `bs://xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`. Set that as `BS_APP_ID` in your `.env`.
+   The response contains an `app_url` like `bs://xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`.
 
    > Full upload docs: [Upload app from filesystem – BrowserStack](https://www.browserstack.com/docs/app-automate/appium/upload-app-from-filesystem?fw-lang=nodejs%2Fwebdriverio)
 
@@ -119,33 +115,6 @@ Run the entire test suite
 npm test
 ```
 
-### Run on Pixel 8 only
-```bash
-npm run test:pixel
-```
-
-### Run individual feature files
-```bash
-npm run test:signup          # Session 1: signup only
-npm run test:view-balance    # Standalone: signup → view balance → delete account
-npm run test:delete-account  # Delete account only (requires active session from signup)
-```
-
-### Run on Xiaomi Redmi Note 11
-```bash
-npm run test:xiaomi      # Full suite on Xiaomi Redmi Note 11 / Android 11
-```
-
-### Run by tag
-```bash
-npm run test:smoke       # @smoke scenarios
-npm run test:regression  # @regression scenarios
-```
-
-### Run directly with WDIO
-```bash
-PLATFORM=android npx wdio run wdio.conf.js --spec features/signup.feature
-```
 
 ---
 
