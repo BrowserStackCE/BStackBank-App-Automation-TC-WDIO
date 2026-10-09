@@ -39,7 +39,7 @@ WebdriverIO + Cucumber BDD test suite for the BStackBank Android app, running on
 
 Before running the demo, complete the following one-time setup steps:
 
-1. **Non-Samsung device skill** — the `SKILL.md` file configures Test Companion to always use a non-Samsung (Google Pixel) device. No action needed; it is already in the repo.
+1. **Non-Samsung device skill** — the `SKILL.md` file configures Test Companion to use a non-Samsung (Google Pixel) device. No action needed; it is already in the repo.
 
 2. **Image injection rule** — the `Image-Injection-Automation.md` file tells the AI to enable camera/image injection and use `./images/browserstack.jpeg` as the default QR code image. No action needed; it is already in the repo.
 
@@ -48,7 +48,8 @@ Before running the demo, complete the following one-time setup steps:
    - ✅ Biometric authentication
    - ✅ Image injection
 
-4. **Intentional locator bug** — `step-definitions/signup.steps.js` line 72 uses `toggle-pasword-visibility` (typo) instead of `toggle-password-visibility`. This is intentional for the Task 3 remediation demo. **Already in place — no action needed.** After the demo, rebase to this commit to reset the repo for the next run.
+4. **Intentional locator bug** — `step-definitions/signup.steps.js` line 72 uses `toggle-pasword-visibility` (typo) instead of `toggle-password-visibility`. This is intentional for the Task 3 remediation demo. \
+After the demo, rebase to this commit to reset the repo for the next run.
 
 ---
 
@@ -78,28 +79,22 @@ Run the entire test suite
 
 1. **Node.js** ≥ 18
 
-2. **BrowserStack credentials** — ensure the following environment variables are set in your shell before running tests:
+2. **BrowserStack credentials** — set these three environment variables in your shell before running tests:
    ```bash
    export BROWSERSTACK_USERNAME=<your-username>
    export BROWSERSTACK_ACCESS_KEY=<your-access-key>
-   ```
-   > Find your credentials at [BrowserStack App Automate dashboard](https://app-automate.browserstack.com/).
-
-3. **App ID** — set the `BS_APP_ID` environment variable to your uploaded app's BrowserStack URL:
-   ```bash
    export BS_APP_ID=bs://<your-app-id>
    ```
-   > If you explored the app via Test Companion, the app is already uploaded and its `bs://` ID is available in the Test Companion panel — use that directly.
+   > Find your credentials at [BrowserStack App Automate dashboard](https://app-automate.browserstack.com/).
+   > If you explored the app via Test Companion, the app is already uploaded — copy its `bs://` ID from the Test Companion panel and use it as `BS_APP_ID`.
 
-   To upload manually:
+   To upload the app manually and get a `bs://` ID:
    ```bash
-   curl -u "YOUR_USERNAME:YOUR_ACCESS_KEY" \
+   curl -u "$BROWSERSTACK_USERNAME:$BROWSERSTACK_ACCESS_KEY" \
      -X POST "https://api-cloud.browserstack.com/app-automate/upload" \
      -F "file=@your-path/app-release.apk"
    ```
    The response contains an `app_url` like `bs://xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`.
-
-   > Full upload docs: [Upload app from filesystem – BrowserStack](https://www.browserstack.com/docs/app-automate/appium/upload-app-from-filesystem?fw-lang=nodejs%2Fwebdriverio)
 
 4. Install dependencies:
    ```bash
