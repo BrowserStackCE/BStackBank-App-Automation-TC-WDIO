@@ -39,7 +39,7 @@ WebdriverIO + Cucumber BDD test suite for the BStackBank Android app, running on
 
 Before running the demo, complete the following one-time setup steps:
 
-1. **Non-Samsung device skill** — the `SKILL.md` file configures Test Companion to use a non-Samsung (Google Pixel) device. No action needed; it is already in the repo.
+1. **Pixel device skill** — the `SKILL.md` file configures Test Companion to use a Google Pixel device. No action needed; it is already in the repo.
 
 2. **Image injection rule** — the `Image-Injection-Automation.md` file tells the AI to enable camera/image injection and use `./images/browserstack.jpeg` as the default QR code image. No action needed; it is already in the repo.
 
@@ -85,16 +85,7 @@ Run the entire test suite
    export BROWSERSTACK_ACCESS_KEY=<your-access-key>
    export BS_APP_ID=bs://<your-app-id>
    ```
-   > Find your credentials at [BrowserStack App Automate dashboard](https://app-automate.browserstack.com/).
    > If you explored the app via Test Companion, the app is already uploaded — copy its `bs://` ID from the Test Companion panel and use it as `BS_APP_ID`.
-
-   To upload the app manually and get a `bs://` ID:
-   ```bash
-   curl -u "$BROWSERSTACK_USERNAME:$BROWSERSTACK_ACCESS_KEY" \
-     -X POST "https://api-cloud.browserstack.com/app-automate/upload" \
-     -F "file=@your-path/app-release.apk"
-   ```
-   The response contains an `app_url` like `bs://xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`.
 
 4. Install dependencies:
    ```bash
