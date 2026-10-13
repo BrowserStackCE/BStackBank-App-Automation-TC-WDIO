@@ -2,7 +2,7 @@ const { When, Then } = require('@wdio/cucumber-framework');
 
 /**
  * View Balance Step Definitions — Test 2
- * Verified flow on Samsung Galaxy S23 / Android (com.yash.bankingapp):
+ * Verified flow on Android (com.yash.bankingapp):
  *
  *   Continues from home dashboard (left by Test 1 — signup).
  *   1. Tap balance eye icon (resource-id: balance-eye-btn,

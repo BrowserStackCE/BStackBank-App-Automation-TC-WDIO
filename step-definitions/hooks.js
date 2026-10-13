@@ -2,7 +2,7 @@ const { Before, After, BeforeAll, AfterAll } = require('@wdio/cucumber-framework
 
 /**
  * Global Hooks
- * Verified flow (Samsung Galaxy S23, com.yash.bankingapp):
+ * Verified flow (com.yash.bankingapp):
  *   1. App launch → Notification permission dialog (Allow / Don't allow)
  *   2. Login → Biometric Authentication dialog (CANCEL / FAIL / PASS)
  *   3. After biometric PASS → Location permission dialog (While using / Only this time / Don't allow)

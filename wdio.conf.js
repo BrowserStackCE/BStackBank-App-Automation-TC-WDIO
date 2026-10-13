@@ -9,71 +9,7 @@ if (!BS_USER || !BS_KEY) {
   );
 }
 
-const bstackOptions = (buildSuffix, sessionName) => ({
-  userName:    BS_USER,
-  accessKey:   BS_KEY,
-  projectName: 'BStackBank Automation',
-  buildName:   `BStackBank ${buildSuffix} - ${new Date().toISOString().split('T')[0]}`,
-  sessionName,
-  debug:       true,
-  networkLogs: true,
-  deviceLogs:  true,
-  appiumLogs:  false,
-});
-
-const platform = process.env.PLATFORM || 'android';
-
-const allCapabilities = {
-  android: {
-    platformName: 'android',
-    'appium:deviceName':        'Google Pixel 8',
-    'appium:platformVersion':   '14.0',
-    'appium:app':               BS_APP,
-    'appium:automationName':    'UiAutomator2',
-    'appium:noReset':           true,
-    'appium:newCommandTimeout': 300,
-    'bstack:options': {
-      ...bstackOptions('Android Pixel', 'BStackBank Signup Test'),
-      enableBiometric: true,
-    },
-  },
-
-  androidPixel: {
-    platformName: 'android',
-    'appium:deviceName':        'Google Pixel 8',
-    'appium:platformVersion':   '14.0',
-    'appium:app':               BS_APP,
-    'appium:automationName':    'UiAutomator2',
-    'appium:noReset':           true,
-    'appium:newCommandTimeout': 300,
-    'bstack:options': {
-      ...bstackOptions('Android Pixel', 'BStackBank QR Scan Test'),
-      enableBiometric:            true,
-      enableCameraImageInjection: true,
-    },
-  },
-
-  androidOnePlus: {
-    platformName: 'android',
-    'appium:deviceName':        'Xiaomi Redmi Note 11',
-    'appium:platformVersion':   '11.0',
-    'appium:app':               BS_APP,
-    'appium:automationName':    'UiAutomator2',
-    'appium:noReset':           true,
-    'appium:newCommandTimeout': 300,
-    'bstack:options': {
-      ...bstackOptions('Android Xiaomi', 'BStackBank Signup Test'),
-      enableBiometric: true,
-    },
-  },
-};
-
-const capabilitiesMap = {
-  androidPixel:   [allCapabilities.androidPixel],
-  androidOnePlus: [allCapabilities.androidOnePlus],
-  all:            [allCapabilities.android, allCapabilities.androidOnePlus],
-  android:        [allCapabilities.android],
-};
+const BUILD_DATE = process.env.BS_BUILD_DATE || (process.env.BS_BUILD_DATE = new Date().toISOString().split('T')[0]);
 
 exports.config = {
   runner:   'local',
@@ -95,17 +31,34 @@ exports.config = {
       './features/view-balance.feature',
     ],
   ],
-  exclude: [],
 
   maxInstances: 2,
 
-  capabilities: capabilitiesMap[platform] || capabilitiesMap.android,
+  capabilities: [{
+    platformName: 'android',
+    'appium:deviceName':        'Google Pixel 8',
+    'appium:platformVersion':   '14.0',
+    'appium:app':               BS_APP,
+    'appium:automationName':    'UiAutomator2',
+    'appium:noReset':           true,
+    'appium:newCommandTimeout': 300,
+    'bstack:options': {
+      projectName:                'BStackBank Automation',
+      buildName:                  `BStackBank - ${BUILD_DATE}`,
+      sessionName:                'BStackBank Test',
+      debug:                      true,
+      networkLogs:                true,
+      deviceLogs:                 true,
+      enableBiometric:            true,
+      enableCameraImageInjection: true,
+    },
+  }],
 
   logLevel:               'error',
   bail:                   0,
   waitforTimeout:         15000,
-  connectionRetryTimeout: 120000,
-  connectionRetryCount:   3,
+  connectionRetryTimeout: 300000,
+  connectionRetryCount:   1,
 
   services: ['browserstack'],
 
@@ -113,17 +66,8 @@ exports.config = {
   reporters: ['spec'],
 
   cucumberOpts: {
-    require:   ['./step-definitions/**/*.js'],
-    backtrace: false,
-    dryRun:    false,
-    failFast:  false,
-    snippets:  true,
-    source:    true,
-    strict:    false,
-    // Exclude @qrscan from the default run — it requires PLATFORM=androidPixel
-    // with enableCameraImageInjection. Run it via: PLATFORM=androidPixel npm test
-    tags:      platform === 'androidPixel' ? '' : 'not @qrscan',
-    timeout:   120000,
-    ignoreUndefinedDefinitions: false,
+    require:  ['./step-definitions/**/*.js'],
+    timeout:  120000,
+    failFast: false,
   },
 };

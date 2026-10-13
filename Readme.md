@@ -15,7 +15,7 @@
 
 WebdriverIO + Cucumber BDD test suite for the BStackBank Android app, running on **BrowserStack App Automate**.
 
-**Target devices:** Google Pixel 8 / Android 14, Xiaomi Redmi Note 11 / Android 11
+**Target device:** Google Pixel 8 / Android 14
 
 ---
 
@@ -96,7 +96,7 @@ Run the entire test suite
 
 ## Running Tests
 
-### Run all tests on both devices (Pixel 8 + Xiaomi Redmi Note 11)
+### Run all tests
 ```bash
 npm test
 ```

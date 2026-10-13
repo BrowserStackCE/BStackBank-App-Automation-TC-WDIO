@@ -5,7 +5,7 @@ const { acceptLocationPermission } = require('./hooks');
 
 /**
  * Signup Step Definitions — Test 1
- * Verified flow on Samsung Galaxy S23 / Android (com.yash.bankingapp):
+ * Verified flow on Android (com.yash.bankingapp):
  *
  *   1. App launch → accept notification permission (if present)
  *   2. Login screen → tap "Go to sign up" (resource-id: goto-signup)
