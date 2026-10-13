@@ -6,5 +6,5 @@ reports/
 .DS_Store
 
 # Test Companion onboarding (local, per-machine)
-.test-companion/
+# .test-companion/
 assets/app-release.apk
