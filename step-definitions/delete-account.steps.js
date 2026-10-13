@@ -4,7 +4,7 @@ const loginPage = require('../page-objects/LoginPage');
 
 /**
  * Delete Account Step Definitions — Test 3
- * Verified flow on Samsung Galaxy S23 / Android (com.yash.bankingapp):
+ * Verified flow on Android (com.yash.bankingapp):
  *
  *   Continues from home dashboard (left by Test 2 — view balance).
  *   1. Tap Profile nav tab (content-desc: ", Profile")

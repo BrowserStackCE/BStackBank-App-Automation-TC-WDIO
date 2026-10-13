@@ -2,7 +2,7 @@ const BasePage = require('./BasePage');
 
 /**
  * HomePage - Page Object for the Home/Dashboard screen
- * Selectors verified via live exploratory session on Google Pixel 8 (Android 14)
+ * Selectors verified via live exploratory session
  * App package: com.yash.bankingapp
  *
  * Verified selectors:
