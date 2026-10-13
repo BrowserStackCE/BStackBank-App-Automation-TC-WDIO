@@ -4,6 +4,7 @@ logs/
 reports/
 *.log
 .DS_Store
+package-lock.json
 
 # Test Companion onboarding (local, per-machine)
 # .test-companion/
