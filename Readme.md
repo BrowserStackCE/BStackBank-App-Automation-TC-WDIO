@@ -2,6 +2,59 @@
 
 A WebdriverIO + Cucumber BDD suite for the **BStackBank Android app** on **BrowserStack App Automate**, used to showcase what **Test Companion** can do inside your IDE in about **30 minutes**:
 
+## Table of Contents
+
+1. [Repo Layout](#repo-layout)
+2. [Agenda (30 min)](#agenda-30-min)
+3. [One-time Setup](#one-time-setup)
+4. [Prerequisites](#prerequisites)
+5. [Demo Walkthrough and Prompts](#demo-walkthrough-and-prompts)
+   (AI RCA and remediation are covered in [Session 3 — Execution](#session-3--execution))
+6. [Running Tests](#running-tests)
+7. [Resetting for the Next Run](#resetting-for-the-next-run)
+
+---
+
+## Repo Layout
+
+```
+BStackBank-App-Automation-TC-WDIO/
+├── .test-companionrules/                   # Project rules and skills, auto-applied in every chat
+│   ├── Image-Injection-Automation.md       #   Camera/image injection + biometric rule
+│   ├── Test-Management-Project.md          #   Asks for the Test Management project name
+│   └── skills/
+│       └── pixel-device/
+│           └── SKILL.md                    #   Device selection skill for image-scanning flows
+├── features/                               # Cucumber feature files
+│   ├── signup.feature
+│   ├── delete-account.feature
+│   └── view-balance.feature
+├── step-definitions/                       # Step implementations and hooks
+│   ├── hooks.js
+│   ├── signup.steps.js
+│   ├── delete-account.steps.js
+│   └── view-balance.steps.js
+├── page-objects/                           # Page objects
+│   ├── BasePage.js
+│   ├── HomePage.js
+│   ├── LoginPage.js
+│   ├── SignupPage.js
+│   └── tasks.txt                           #   Demo notes
+├── resources/                              # Demo inputs
+│   ├── BrowserStack_Bank_PRD_v1.0.pdf      #   PRD (attach to the Jira story)
+│   ├── Jira Story.pdf                      #   Story content (copy into the Jira story)
+│   └── sample-qr-images/
+│       ├── browserstack.jpeg               #   Default QR image for scanning
+│       └── Wikepedia.jpeg                  #   Alternate QR image
+├── wdio.conf.js                            # App Automate config, parallel specs, capabilities
+├── package.json                            # Dependencies and npm test scripts
+├── .gitignore
+├── LICENSE
+└── Readme.md
+```
+
+---
+
 | # | Capability | What you show |
 |---|------------|---------------|
 | 1 | **Test case coverage** | Generate comprehensive test cases from a Jira story + PRD and measure what is covered vs. missing |
@@ -9,20 +62,6 @@ A WebdriverIO + Cucumber BDD suite for the **BStackBank Android app** on **Brows
 | 3 | **Parallel sessions** | Run multiple Test Companion tasks at once — to accelearte exploratory testing, test case design and test automation all together. |
 | 4 | **Real device exploration** | Explore on a real device for advanced features: **biometric** auth and **image (QR) scanning** |
 | 5 | **AI RCA and script remediation** | Analyse failures with AI RCA and auto-fix broken locators in the scripts |
-
----
-
-## Table of Contents
-
-1. [Agenda (30 min)](#agenda-30-min)
-2. [One-time Setup](#one-time-setup)
-3. [Prerequisites](#prerequisites)
-4. [Demo Walkthrough and Prompts](#demo-walkthrough-and-prompts)
-5. [Running Tests](#running-tests)
-6. [Test Scenarios and Parallel Sessions](#test-scenarios-and-parallel-sessions)
-   (AI RCA and remediation are covered in [Session 3 — Execution](#session-3--execution))
-7. [Repo Layout](#repo-layout)
-8. [Resetting for the Next Run](#resetting-for-the-next-run)
 
 ---
 
@@ -46,9 +85,10 @@ A WebdriverIO + Cucumber BDD suite for the **BStackBank Android app** on **Brows
 
 1. **Skills and rules (auto-detected)** — the `.test-companionrules/` folder holds the project's skills (`skills/`) and rules (e.g. `Image-Injection-Automation.md`, `Test-Management-Project.md`). Test Companion detects them automatically and applies them in every chat: device selection for image-scanning flows, camera/image injection, biometric enablement and the default QR image (see `resources/sample-qr-images/`). No action needed; they are already in the repo.
 
-3. **Test Companion settings** — in the Test Companion settings panel, enable:
-   - ✅ Biometric authentication
-   - ✅ Image injection
+3. **Test Companion settings** — in the Test Companion settings panel, enable under `Mobile Settings`:
+   - ✅ Biometric bypass
+   - ✅ Camera media injection
+   - ✅ Use my App Automate Account
 
 4. **Jira / Test Management** — connect Jira and BrowserStack Test Management (Azure Test Plans optional) so the planning step can read the story and push cases.
    The requirement documents are in `resources/`: `BrowserStack_Bank_PRD_v1.0.pdf` and `Jira Story.pdf`.
@@ -65,9 +105,8 @@ A WebdriverIO + Cucumber BDD suite for the **BStackBank Android app** on **Brows
    ```bash
    export BROWSERSTACK_USERNAME=<your-username>
    export BROWSERSTACK_ACCESS_KEY=<your-access-key>
-   export BS_APP_ID=bs://<your-app-id>
    ```
-3. **BrowserStack Test Management project** — create one project (for example, `BStackBank Demo`) in BrowserStack Test Management **before the demo** and use that same project in all three sessions. Test cases generated in Session 1 are pushed to it, and Session 3 retro-tagging matches existing tests against it. The `Test-Management-Project.md` rule in `.test-companionrules/` makes Test Companion ask for the project name, apply it as `projectName` in `wdio.conf.js`, and use it for test case push and retro-tagging, so give the same name in each chat.
+3. **BrowserStack Test Management project** — In the `Test Cases` Panel, create a blank project (for example, `BStackBank Demo`) in BrowserStack Test Management **before the demo** and use that same project in all three sessions. Test cases generated in Session 1 are pushed to it, and Session 3 retro-tagging matches existing tests against it. The `Test-Management-Project.md` rule in `.test-companionrules/` makes Test Companion ask for the project name, apply it as `projectName` in `wdio.conf.js`, and use it for test case push and retro-tagging, so give the same name in each chat.
 4. Install dependencies:
    ```bash
    npm install
@@ -83,31 +122,28 @@ Run the demo as **three Test Companion chats (sessions)**, open side by side. Ea
 
 | Session | Task | Capabilities shown |
 |---------|------|--------------------|
-| **Session 1 — Test Plan** | Requirements to test cases, coverage gaps, push to Test Management | Test case coverage |
-| **Session 2 — Exploratory + Automation** | Explore on a real device (biometric, QR scan), then automate the cases | Real device exploration |
-| **Session 3 — Execution** | Retro-tag, run in parallel, AI RCA and fix | Retro-tagging, parallel sessions, AI RCA and remediation |
+| **Chat 1 — Test Plan** | Requirements to test cases, coverage gaps, push to Test Management | Test case coverage |
+| **Chat 2 — Exploratory + Automation** | Explore on a real device (biometric, QR scan), then automate the cases | Real device exploration |
+| **Chat 3 — Execution** | Retro-tag, run in parallel, AI RCA and fix | Retro-tagging, parallel sessions, AI RCA and remediation |
 
 > All three sessions use the **same Test Management project** (see [Prerequisites](#prerequisites)).
 
-> Keep sessions independent: don't ask one chat to read another's output. Session 2 adds new feature files; Session 3 tags only the existing files in `features/`, so they don't overlap.
-
-### Session 1 — Test Plan
+### Chat 1 — Test Plan
 
 **Goal:** turn the Jira story + PRD into test cases and see what the existing suite doesn't cover.
 
 1. Generate test cases from the requirements:
    ```
-   Create comprehensive test cases based on the project requirements
-   and specifications from the following link: <Jira ticket link>
+   Create comprehensive test cases from the following link: <Jira ticket link>
    ```
 2. Check coverage against the existing suite:
    ```
    Compare the generated test cases with the existing features/ folder and show
    which requirements are not yet covered by automation.
    ```
-3. Optionally push the cases to BrowserStack Test Management (or Azure Test Plans) and compare field mapping.
+3. Demo `TEST STATE` field mapping in the test grid, adopting to system like Azure vs BrowserStack TM. Optionally push the cases to BrowserStack Test Management (or Azure Test Plans).
 
-### Session 2 — Exploratory + Automation
+### Chat 2 — Exploratory + Automation
 
 **Goal:** explore the app on a real device for biometric and image scanning, then automate what was found.
 
@@ -126,7 +162,7 @@ Notes:
 - QR scanning uses the injected image `browserstack.jpeg` (alternate: `Wikepedia.jpeg`) from `resources/sample-qr-images/`.
 - Biometric prompts are passed via `enableBiometric: true` in `wdio.conf.js`.
 
-### Session 3 — Execution
+### Chat 3 — Execution
 
 **Goal:** tag the existing tests, run them in parallel sessions, then analyse and fix a broken locator.
 
@@ -148,13 +184,13 @@ Notes:
    ```
    Run the entire test suite
    ```
-   Open the BrowserStack App Automate dashboard to show both sessions running at once.
+   Open the BrowserStack App Automate dashboard to show build running.
 
 3. **Break a locator on purpose.** In `step-definitions/signup.steps.js` (line 72) change `toggle-password-visibility` to `toggle-pasword-visibility`, then run the suite again so the signup and view-balance tests fail.
 
 4. **AI RCA:**
    ```
-   Analyse the failures in this build with AI RCA and tell me why they failed.
+   Select the failed test from `Failure Analysis` Panel and click on `Fix`.
    ```
    AI RCA reads the BrowserStack session logs and identifies the failing step and cause (element not found for the `toggle-pasword-visibility` resource-id).
 
@@ -169,48 +205,12 @@ Notes:
 ## Running Tests
 
 ```bash
-npm test                      # full suite, 2 parallel sessions
-npm run test:signup           # signup feature only
-npm run test:view-balance     # view-balance feature only
-npm run test:delete-account   # delete-account feature only
-npm run test:smoke            # tests tagged @smoke
-npm run test:regression       # tests tagged @regression
-```
-
----
-
-## Test Scenarios and Parallel Sessions
-
-Configured in `wdio.conf.js` (`maxInstances: 2`) on **Google Pixel 8 / Android 14**. The suite runs as **2 parallel sessions**:
-
-### Device run A — `signup.feature` + `delete-account.feature` (shared session)
-
-| Feature | Scenario | Description |
-|---------|----------|-------------|
-| `signup.feature` | Signup with auto-credentials and land on home dashboard | Autofill → eye icon → Create Account → home dashboard |
-| `delete-account.feature` | Go to profile and delete the account | Profile tab → scroll → Delete Account → confirm → login screen |
-
-### Device run B — `view-balance.feature` (self-contained session)
-
-| Feature | Scenario | Description |
-|---------|----------|-------------|
-| `view-balance.feature` | Signup, view balance, then delete account | Signup → home dashboard → tap eye icon → biometric PASS → balance revealed → delete account |
-
----
-
-## Repo Layout
-
-```
-.test-companionrules/   Project rules and skills (auto-applied in every chat)
-features/               Cucumber feature files
-step-definitions/       Step implementations and hooks
-page-objects/           Page objects (Base, Home, Login, Signup)
-resources/              PRD, Jira story PDF, sample QR images
-wdio.conf.js            BrowserStack App Automate config, parallel specs, capabilities
+npm test                      # full suite, 2 parallel sessions (maxInstances: 2)
+npm run test:view-balance     # only view-balance feature tagged @view-balance
 ```
 
 ---
 
 ## Resetting for the Next Run
 
-After the demo, reset the repo to the baseline commit (`git reset --hard <baseline-sha>` or rebase) so generated tests, tags and any intentional locator bug are cleared.
+After the demo, reset the repo to the baseline commit (`git reset --hard` or rebase) so generated tests, tags and any locator changes are cleared.
