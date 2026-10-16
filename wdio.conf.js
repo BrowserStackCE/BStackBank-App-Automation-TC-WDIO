@@ -43,7 +43,7 @@ exports.config = {
     'appium:noReset':           true,
     'appium:newCommandTimeout': 300,
     'bstack:options': {
-      projectName:                'BStackBank Automation',
+      projectName:                'TC-Demo5',
       buildName:                  `BStackBank - ${BUILD_DATE}`,
       sessionName:                'BStackBank Test',
       debug:                      true,
@@ -51,6 +51,7 @@ exports.config = {
       deviceLogs:                 true,
       enableBiometric:            true,
       enableCameraImageInjection: true,
+      interactiveDebugging: true
     },
   }],
 
