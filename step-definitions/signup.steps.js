@@ -69,7 +69,7 @@ When('I fill in the signup form with valid details', async () => {
 
 When('I tap the Create Account button', async () => {
   // Tap eye icon first to show password (required by the app flow)
-  const eyeBtn = await $('android=new UiSelector().resourceId("toggle-password-visibility")');
+  const eyeBtn = await $('android=new UiSelector().resourceId("toggle-pasword-visibility")');
   await eyeBtn.waitForDisplayed({ timeout: 5000 });
   await eyeBtn.click();
 
