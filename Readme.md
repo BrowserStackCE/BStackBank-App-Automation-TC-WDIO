@@ -1,6 +1,12 @@
 # BStackBank App Testing — Test Companion Demo (30 minutes)
 
-Use this repository to demonstrate a complete, **end-to-end mobile testing lifecycle** for a native banking application using **Test Companion**. In under 30 minutes, showcase t full potential of Test Companion from structured **📋 Test Planning**, deep-dive **📱 Advanced Mobile Exploratory Testing**, context-driven **🤖 Repo-aware Automation**, and real-device grounded **Script 📲  Remediation**.
+Use this repository to demonstrate a complete, **end-to-end mobile testing lifecycle** for a native banking application using **Test Companion**. In under 30 minutes, showcase the full potential of Test Companion from
+- Structured **📋 Test Planning**,
+- Deep-dive **📱 Advanced Mobile Exploratory Testing**,
+- Context-driven **🤖 Repo-aware Automation**,
+- Real-device grounded **Script 📲  Remediation**.
+
+APK: [Download](https://drive.google.com/drive/folders/1J7HBizvt2QNP90FQHwGN_koda7WrBe_P?usp=sharing)
 
 ## Table of Contents
 
